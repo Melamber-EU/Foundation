@@ -30,14 +30,13 @@
         {
             this.btnRun = new System.Windows.Forms.Button();
             this.dgvSoaks = new System.Windows.Forms.DataGridView();
-            this.btnDefaultTimers = new System.Windows.Forms.Button();
             this.txtOutPut = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(825, 12);
+            this.btnRun.Location = new System.Drawing.Point(687, 12);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(140, 58);
             this.btnRun.TabIndex = 0;
@@ -47,28 +46,23 @@
             // 
             // dgvSoaks
             // 
+            this.dgvSoaks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvSoaks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSoaks.Location = new System.Drawing.Point(12, 12);
             this.dgvSoaks.Name = "dgvSoaks";
-            this.dgvSoaks.Size = new System.Drawing.Size(807, 676);
+            this.dgvSoaks.Size = new System.Drawing.Size(669, 676);
             this.dgvSoaks.TabIndex = 1;
-            // 
-            // btnDefaultTimers
-            // 
-            this.btnDefaultTimers.Location = new System.Drawing.Point(825, 76);
-            this.btnDefaultTimers.Name = "btnDefaultTimers";
-            this.btnDefaultTimers.Size = new System.Drawing.Size(75, 23);
-            this.btnDefaultTimers.TabIndex = 4;
-            this.btnDefaultTimers.Text = "Default";
-            this.btnDefaultTimers.UseVisualStyleBackColor = true;
-            this.btnDefaultTimers.Click += new System.EventHandler(this.BtnDefaultTimers_Click);
             // 
             // txtOutPut
             // 
-            this.txtOutPut.Location = new System.Drawing.Point(825, 105);
+            this.txtOutPut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutPut.Location = new System.Drawing.Point(687, 76);
             this.txtOutPut.Multiline = true;
             this.txtOutPut.Name = "txtOutPut";
-            this.txtOutPut.Size = new System.Drawing.Size(564, 583);
+            this.txtOutPut.Size = new System.Drawing.Size(702, 612);
             this.txtOutPut.TabIndex = 5;
             // 
             // Form1
@@ -77,7 +71,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1394, 700);
             this.Controls.Add(this.txtOutPut);
-            this.Controls.Add(this.btnDefaultTimers);
             this.Controls.Add(this.dgvSoaks);
             this.Controls.Add(this.btnRun);
             this.Name = "Form1";
@@ -92,7 +85,6 @@
 
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.DataGridView dgvSoaks;
-        private System.Windows.Forms.Button btnDefaultTimers;
         private System.Windows.Forms.TextBox txtOutPut;
     }
 }
