@@ -1,0 +1,300 @@
+﻿function()    
+    test = "false"
+    if test == "true"
+    then
+        cd01_time = 5
+        cd02_time = 10
+        cd03_time = 15
+        cd04_time = 20
+        cd05_time = 25
+        cd06_time = 30
+        cd07_time = 35
+        cd08_time = 40
+        cd09_time = 45
+    else
+        cd01_time = 75
+        cd02_time = 179
+        cd03_time = 191
+        cd04_time = 195
+        cd05_time = 207
+        cd06_time = 210
+        cd07_time = 215
+        cd08_time = 221
+        cd09_time = 231
+        cd010_time = 240
+        cd011_time = 245
+        cd012_time = 256
+        cd013_time = 295
+        cd014_time = 301
+        cd015_time = 303
+        cd016_time = 310
+        cd017_time = 321
+        cd018_time = 330
+        cd019_time = 332
+        cd020_time = 334
+        cd021_time = 339
+        cd022_time = 342
+        cd023_time = 354
+        cd024_time = 354
+        cd025_time = 354
+        cd026_time = 363
+        cd027_time = 363
+        cd028_time = 370
+        cd029_time = 370
+        cd030_time = 403
+        cd031_time = 417
+        cd032_time = 425
+        cd033_time = 430
+        cd034_time = 436
+        cd035_time = 442
+        cd036_time = 452
+        cd037_time = 452
+        cd038_time = 452
+        cd039_time = 463
+        cd040_time = 463
+        cd041_time = 470
+        cd042_time = 470
+        cd043_time = 475
+        cd044_time = 475
+        cd045_time = 480
+        cd046_time = 490
+    end
+    
+    --Timing to show
+    
+    -- Live Timers
+    
+    
+    cd01_text = "Wiig,Trehippy,Reinf,Liffy,Noot - 4"
+    cd02_text = "Pally,Ved - 5 Center"
+    cd03_text = "Unfair - 5 Center"
+    cd04_text = "Hemo,Ryds - 5 Center"
+    cd05_text = "Grim - 5 Center"
+    cd06_text = "Nam - 5 Center"
+    cd07_text = "Yarish - 5 Console"
+    cd08_text = "Rek, Wiig - 5 Console"
+    cd09_text = "Mel, Reinf - 5 Console"
+    cd10_text = "Liffy, Noot - 5 Console"
+    cd11_text = "Pally, Ved - 5 Console"
+    cd12_text = "Unfair - 5 Console"
+    cd13_text = "Hemo - 5 Console"
+    cd14_text = "Ryds - 5 Console"
+    cd15_text = "Grim - 5 Console"
+    cd16_text = "Nam, Yarish - 5 Console"
+    cd17_text = "Ryds - 5 Console"
+    cd18_text = "Tank that Moves"
+    cd19_text = "Grim - 5 Console"
+    cd20_text = "Nam - 5 Console"
+    cd21_text = "Yarish - 5 Console"
+    cd22_text = "Rek - 5 Console"
+    cd23_text = "Mel, Reinf - 5 Console"
+    
+    --Sound to play  
+    sound1="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound2="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound3="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound4="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound5="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound6="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound7="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    sound8="Interface\\AddOns\\WeakAuras\\Media\\Sounds\\Circle.ogg"
+    
+    channel="Master" --Channel to play through
+    
+    --Don't edit below unless you want to assign different sounds and duration
+    
+    tval=ceil((GetTime() - aura_env.timer))
+    
+    if aura_env.timer and (tval > cd01_time and tval < cd01_time + 4)
+    then         
+        if not aura_env.soundPlayed then   
+            SendChatMessage(cd01_text, "RAID_WARNING")
+            aura_env.soundPlayed=true
+        end
+        return cd01_text 
+    elseif aura_env.timer and (tval > cd02_time and tval < cd02_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd02_text, "RAID_WARNING")
+            aura_env.soundPlayed=true
+        end        
+        return cd02_text 
+    elseif aura_env.timer and (tval > cd03_time and tval < cd03_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd03_text, "RAID_WARNING")
+            aura_env.soundPlayed=true
+        end        
+        return cd03_text 
+    elseif aura_env.timer and (tval > cd04_time and tval < cd04_time + 4)
+    then      
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd04_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end
+        return cd04_text
+    elseif aura_env.timer and (tval > cd05_time and tval < cd05_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd05_text, "RAID_WARNING")
+            --            PlaySoundFile(sound6,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd05_text
+    elseif aura_env.timer and (tval > cd06_time and tval < cd06_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd06_text, "RAID_WARNING")
+            --            PlaySoundFile(sound8,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd06_text
+    elseif aura_env.timer and (tval > cd07_time and tval < cd07_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd07_text, "RAID_WARNING")
+            --            PlaySoundFile(sound1,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd07_text
+    elseif aura_env.timer and (tval > cd08_time and tval < cd08_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd08_text, "RAID_WARNING")
+            --            PlaySoundFile(sound3,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd08_text
+    elseif aura_env.timer and (tval > cd09_time and tval < cd09_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd09_text, "RAID_WARNING")
+            --            PlaySoundFile(sound4,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd09_text
+    elseif aura_env.timer and (tval > cd010_time and tval < cd010_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd10_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd10_text
+    elseif aura_env.timer and (tval > cd011_time and tval < cd011_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd11_text, "RAID_WARNING")
+            --            PlaySoundFile(sound6,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd11_text
+    elseif aura_env.timer and (tval > cd012_time and tval < cd012_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd12_text, "RAID_WARNING")
+            --            PlaySoundFile(sound7,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd12_text
+    elseif aura_env.timer and (tval > cd013_time and tval < cd013_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd13_text, "RAID_WARNING")
+            --            PlaySoundFile(sound1,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd13_text
+    elseif aura_env.timer and (tval > cd014_time and tval < cd014_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd14_text, "RAID_WARNING")
+            --            PlaySoundFile(sound2,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd14_text
+    elseif aura_env.timer and (tval > cd015_time and tval < cd015_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd15_text, "RAID_WARNING")
+            --            PlaySoundFile(sound3,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd15_text
+    elseif aura_env.timer and (tval > cd016_time and tval < cd016_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd16_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd16_text
+        
+    elseif aura_env.timer and (tval > cd017_time and tval < cd017_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd17_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd17_text
+    elseif aura_env.timer and (tval > cd018_time and tval < cd018_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd18_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd18_text
+    elseif aura_env.timer and (tval > cd019_time and tval < cd019_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd19_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd19_text
+    elseif aura_env.timer and (tval > cd020_time and tval < cd020_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd20_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd20_text
+    elseif aura_env.timer and (tval > cd021_time and tval < cd021_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd21_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd21_text        
+    elseif aura_env.timer and (tval > cd022_time and tval < cd022_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd22_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd22_text
+    elseif aura_env.timer and (tval > cd023_time and tval < cd023_time + 4)
+    then        
+        if not aura_env.soundPlayed then
+            SendChatMessage(cd23_text, "RAID_WARNING")
+            --            PlaySoundFile(sound5,channel)
+            aura_env.soundPlayed=true
+        end        
+        return cd23_text
+        
+    elseif aura_env.timer and tval ~= cd01_time and tval ~= cd02_time and tval ~= cd03_time and tval ~= cd04_time and tval ~= cd05_time and tval ~= cd06_time and tval ~= cd07_time and tval ~= cd08_time and tval ~= cd08_time and tval ~= cd09_time and tval ~= cd010_time and tval ~= cd011_time and tval ~= cd012_time and tval ~= cd013_time and tval ~= cd014_time and tval ~= cd015_time and tval ~= cd016_time and tval ~= cd017_time and tval ~= cd018_time and tval ~= cd019_time and tval ~= cd020_time and tval ~= cd021_time and tval ~= cd022_time and tval ~= cd023_time
+    then aura_env.soundPlayed=nil
+        
+    end   
+    if WeakAuras.IsOptionsOpen() then
+        return "Text Do Something"  
+    end
+    return " "
+end
+
