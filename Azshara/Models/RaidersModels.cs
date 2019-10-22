@@ -164,6 +164,10 @@ namespace Azshara.Models
         public static List<RaidersM> GetRaiders()
         {
             List<RaidersM> raidersMs = new List<RaidersM>();
+            raidersMs.Add(new RaidersM
+            {
+                name = ""
+            });
             raidersMs.Add(new RaidersM {
                 name = "Wârn"
             });

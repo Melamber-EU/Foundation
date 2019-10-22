@@ -17,16 +17,57 @@ namespace Azshara
         DataTable dtTimers = new DataTable();
         DataTable dtRaiders = new DataTable();
         DataTable dtSetup = new DataTable();
+        DataTable dtLiveTeam = new DataTable();
         string header = "";
         string midd = "";
         public Form1()
         {
             InitializeComponent();
+#if DEBUG
+            btnCheck.Visible = true;
+#else
+    btnCheck.Visible = false;
+#endif
+            GenerateTeamPicker();
             GenerateHeader();
             GenerateMid();
             SetupGrid();
             LoadData();
             dgvSoaks.DataSource = dtTimers;
+            List<RaidersM> swapOutRaidersModels = new List<RaidersM>(RaidersModels.GetRaiders());
+            List<RaidersM> swapInListRaidersModels = new List<RaidersM>(RaidersModels.GetRaiders());
+            cboSwapIn.DataSource = swapInListRaidersModels;
+            cboSwapIn.ValueMember = "name";
+            cboSwapOut.DataSource = swapOutRaidersModels;
+            cboSwapOut.ValueMember = "name";
+        }
+
+        private void GenerateTeamPicker()
+        {
+            List<RaidersM> raidTeam = new List<RaidersM>(RaidersModels.GetRaiders());
+            DataGridViewCheckBoxColumn chkCol1 = new DataGridViewCheckBoxColumn();
+            chkCol1.HeaderText = "Picked";
+            chkCol1.Name = "enabled";
+            dtLiveTeam.Columns.Add("Raider",typeof(string));
+            dtLiveTeam.Columns.Add("Debuff End", typeof(int));
+            dtLiveTeam.Columns.Add("Debuff Remain", typeof(int));
+            foreach (var record in raidTeam)
+            {
+                if (record.name == "")
+                { }
+                else
+                {
+                    DataRow dRow = dtLiveTeam.NewRow();
+                    dRow[0] = record.name;
+
+                    dtLiveTeam.Rows.Add(dRow);
+                    
+                }
+                
+            }
+            //dtLiveTeam.AcceptChanges;
+            dgvPickTeam.DataSource = dtLiveTeam;
+            dgvPickTeam.Columns.Add(chkCol1);
         }
 
         private void GenerateMid()
@@ -125,11 +166,52 @@ namespace Azshara
             { }
             else
             {
-                DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgvSoaks.Rows[e.RowIndex].Cells[0];
+                DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgvSoaks.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cb.Value != null)
                 {
                     try {
-
+                        string nameR = cb.Value.ToString();                        
+                        dtSetup = new DataTable();
+                        foreach (DataGridViewColumn col in dgvSoaks.Columns)
+                        {
+                            dtSetup.Columns.Add(col.Name);
+                        }
+                        foreach (DataGridViewRow row in dgvSoaks.Rows)
+                        {
+                            DataRow dRow = dtSetup.NewRow();
+                            foreach (DataGridViewCell cell in row.Cells)
+                            {
+                                dRow[cell.ColumnIndex] = cell.Value;
+                            }
+                            dtSetup.Rows.Add(dRow);
+                        }
+                        int liveDebuffStart = 200;
+                        int liveRowTime = Convert.ToInt32(dgvSoaks.Rows[e.RowIndex].Cells[5].Value);
+                        foreach (DataRow liveRow in dtLiveTeam.Rows)
+                        {
+                            if (liveRow.ItemArray[0].ToString() == nameR)
+                            {
+                                liveRow[1] = liveDebuffStart;
+                            }
+                            dtLiveTeam.AcceptChanges();
+                        }
+                        dgvPickTeam.Refresh();
+                        foreach (DataRow row in dtSetup.Rows)
+                        {
+                            if (nameR == row.ItemArray[0].ToString() || nameR == row.ItemArray[1].ToString() || 
+                                nameR == row.ItemArray[2].ToString() || nameR == row.ItemArray[3].ToString() || 
+                                nameR == row.ItemArray[4].ToString())
+                            {
+                                int rowTime = Convert.ToInt32(dgvSoaks.Rows[e.RowIndex].Cells[5].Value);
+                                int timeAssigned = Convert.ToInt32(row.ItemArray[5]);
+                                int expireDebuff = timeAssigned + 120;
+                                int index = dtSetup.Rows.IndexOf(row);
+                                if (rowTime <= expireDebuff && e.RowIndex != index)
+                                {
+                                    MessageBox.Show("Error", "Previous Debuff Still Active");
+                                }
+                            }
+                        }
                     }
                     catch { }
                 }
@@ -321,6 +403,29 @@ namespace Azshara
             foreach (var rec in timers)
             {
                 dtTimers.Rows.Add(rec.timers);
+            }
+        }
+
+        private void BtnCheck_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void BtnSwap_Click(object sender, EventArgs e)
+        {
+            string swapOut = cboSwapOut.Text;
+            string swapIn = cboSwapIn.Text;
+            foreach (DataGridViewColumn col in dgvSoaks.Columns)
+            {
+                int colIndex = dgvSoaks.Columns.IndexOf(col);
+                foreach (DataGridViewRow row in dgvSoaks.Rows)
+                {
+                    Console.WriteLine(row.Cells[colIndex].Value);
+                    if (Convert.ToString(row.Cells[colIndex].Value) == swapOut)
+                    {
+                        row.Cells[colIndex].Value = swapIn;
+                    }
+                }
             }
         }
     }
