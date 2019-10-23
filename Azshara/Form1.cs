@@ -9,20 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Azshara
 {
-    public partial class Form1 : Form
+    public partial class MainPage : Form
     {
         DataTable dtTimers = new DataTable();
         DataTable dtRaiders = new DataTable();
         DataTable dtSetup = new DataTable();
         DataTable dtLiveTeam = new DataTable();
+        DataSet dataSet = new DataSet();
         string header = "";
         string midd = "";
-        public Form1()
+        public MainPage()
         {
             InitializeComponent();
+            dataSet.Tables.Add(dtSetup);
 #if DEBUG
             btnCheck.Visible = true;
 #else
@@ -273,6 +277,7 @@ namespace Azshara
                     SetC1R = "cd0" + counter.ToString() + "_text",
                 });
             }
+            dgvLoad.DataSource = dtSetup;
         }
 
         string cdTimersString = "";
@@ -286,6 +291,9 @@ namespace Azshara
             cdRaidersString = cdRaidersString + System.Environment.NewLine + input;
         }
         string output = "";
+
+        public string ImportFileNameXML { get; private set; }
+
         public void DoWorkCreateWeakaura()
         {
             output = header;
@@ -410,11 +418,30 @@ namespace Azshara
 
         private void BtnCheck_Click(object sender, EventArgs e)
         {
-            
+            dgvSoaks.CellClick -= DgvSoaks_RowEnter;
+            dgvSoaks.CellValueChanged -= dgvSoaks_CellValueChanged;
+            foreach (DataRow row in dtSetup.Rows)
+            {
+                int rowIndex = dtSetup.Rows.IndexOf(row);
+                foreach (DataColumn col in dtSetup.Columns)
+                {
+                    int colIndex = dtSetup.Columns.IndexOf(col);
+                    Console.WriteLine(row.ItemArray[colIndex]);
+
+                    try
+                    {
+                        dgvSoaks.Rows[rowIndex].Cells[colIndex].Value = row.ItemArray[colIndex];
+                    }
+                    catch { }
+                }
+            }
+            dgvSoaks.CellClick += DgvSoaks_RowEnter;
+            dgvSoaks.CellValueChanged += dgvSoaks_CellValueChanged;
         }
 
         private void BtnSwap_Click(object sender, EventArgs e)
         {
+            
             string swapOut = cboSwapOut.Text;
             string swapIn = cboSwapIn.Text;
             foreach (DataGridViewColumn col in dgvSoaks.Columns)
@@ -436,6 +463,7 @@ namespace Azshara
                     row[1] = 0;
                 }
             }
+            
         }
 
         private void DgvSoaks_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -475,13 +503,64 @@ namespace Azshara
                     {
                         if (cell.Value != null)
                         {
-                            Console.WriteLine(cell.Value.ToString());
+                           // Console.WriteLine(cell.Value.ToString());
 
                         }
                     }
                 }
             }
             dgvSoaks.CellClick += DgvSoaks_RowEnter;
+        }
+
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            DataSet dsXml = new DataSet();
+            try { dsXml.Tables.Add(dtSetup); }
+            catch { }
+
+            string strDsXml = dsXml.GetXml();
+            string datetimenowSave = DateTime.Now.ToString();
+            datetimenowSave = CleanFileName(datetimenowSave);
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara"; // your code goes here
+
+            Directory.CreateDirectory(subPath);
+
+            string xmlFile = "SetUp" + datetimenowSave + ".xml";
+            string savedFilePath = subPath + "\\" + xmlFile;
+            using (StreamWriter fs = new StreamWriter(savedFilePath)) // XML File Path
+            {
+                dtSetup.WriteXml(fs, XmlWriteMode.WriteSchema);
+            }
+        }
+
+        private void BtnImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string subPath = pathtosave + "\\Azshara";
+                openFileDialogImportSheet.InitialDirectory = subPath;
+            }
+            catch { }
+            DialogResult result = openFileDialogImportSheet.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                ImportFileNameXML = openFileDialogImportSheet.FileName;
+                dtSetup.Clear();
+                DataSet dsXml = new DataSet();
+                try { dsXml.Tables.Add(dtSetup); }
+                catch { }
+                dtSetup.ReadXml(ImportFileNameXML);
+                dgvLoad.DataSource = dtSetup;
+                dgvLoad.Refresh();
+                //dgvLoad.Sort(dgvLoad.Columns["Row"], ListSortDirection.Ascending);
+            }
+            //Console.WriteLine(result);
+        }
+        private static string CleanFileName(string fileName)
+        {
+            return Regex.Replace(fileName, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
         }
     }
 }
