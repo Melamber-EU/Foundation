@@ -39,16 +39,16 @@
             this.dgvPickTeam = new System.Windows.Forms.DataGridView();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabCSetup = new System.Windows.Forms.TabControl();
+            this.tpBuilder = new System.Windows.Forms.TabPage();
+            this.tpLive = new System.Windows.Forms.TabPage();
             this.dgvSoaks = new System.Windows.Forms.DataGridView();
             this.dgvLoad = new System.Windows.Forms.DataGridView();
             this.openFileDialogImportSheet = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabCSetup.SuspendLayout();
+            this.tpBuilder.SuspendLayout();
+            this.tpLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).BeginInit();
             this.SuspendLayout();
@@ -163,37 +163,37 @@
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
-            // tabControl1
+            // tabCSetup
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 41);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(669, 647);
-            this.tabControl1.TabIndex = 15;
+            this.tabCSetup.Controls.Add(this.tpBuilder);
+            this.tabCSetup.Controls.Add(this.tpLive);
+            this.tabCSetup.Location = new System.Drawing.Point(12, 41);
+            this.tabCSetup.Name = "tabCSetup";
+            this.tabCSetup.SelectedIndex = 0;
+            this.tabCSetup.Size = new System.Drawing.Size(669, 647);
+            this.tabCSetup.TabIndex = 15;
             // 
-            // tabPage1
+            // tpBuilder
             // 
-            this.tabPage1.Controls.Add(this.dgvSoaks);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(661, 621);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpBuilder.Controls.Add(this.dgvSoaks);
+            this.tpBuilder.Location = new System.Drawing.Point(4, 22);
+            this.tpBuilder.Name = "tpBuilder";
+            this.tpBuilder.Padding = new System.Windows.Forms.Padding(3);
+            this.tpBuilder.Size = new System.Drawing.Size(661, 621);
+            this.tpBuilder.TabIndex = 0;
+            this.tpBuilder.Text = "Builder";
+            this.tpBuilder.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tpLive
             // 
-            this.tabPage2.Controls.Add(this.dgvLoad);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(661, 621);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpLive.Controls.Add(this.dgvLoad);
+            this.tpLive.Location = new System.Drawing.Point(4, 22);
+            this.tpLive.Name = "tpLive";
+            this.tpLive.Padding = new System.Windows.Forms.Padding(3);
+            this.tpLive.Size = new System.Drawing.Size(661, 621);
+            this.tpLive.TabIndex = 1;
+            this.tpLive.Text = "Live";
+            this.tpLive.UseVisualStyleBackColor = true;
             // 
             // dgvSoaks
             // 
@@ -236,7 +236,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1542, 700);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabCSetup);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.dgvPickTeam);
@@ -251,9 +251,9 @@
             this.Name = "MainPage";
             this.Text = "WA Generator";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tabCSetup.ResumeLayout(false);
+            this.tpBuilder.ResumeLayout(false);
+            this.tpLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).EndInit();
             this.ResumeLayout(false);
@@ -274,10 +274,10 @@
         private System.Windows.Forms.DataGridView dgvPickTeam;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tabCSetup;
+        private System.Windows.Forms.TabPage tpBuilder;
         private System.Windows.Forms.DataGridView dgvSoaks;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpLive;
         private System.Windows.Forms.DataGridView dgvLoad;
         private System.Windows.Forms.OpenFileDialog openFileDialogImportSheet;
     }
