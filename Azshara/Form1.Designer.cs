@@ -44,7 +44,7 @@
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(1264, 12);
+            this.btnRun.Location = new System.Drawing.Point(1082, 12);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(140, 50);
             this.btnRun.TabIndex = 0;
@@ -54,28 +54,36 @@
             // 
             // dgvSoaks
             // 
+            this.dgvSoaks.AllowUserToAddRows = false;
+            this.dgvSoaks.AllowUserToDeleteRows = false;
+            this.dgvSoaks.AllowUserToResizeColumns = false;
+            this.dgvSoaks.AllowUserToResizeRows = false;
             this.dgvSoaks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvSoaks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSoaks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSoaks.Location = new System.Drawing.Point(12, 12);
             this.dgvSoaks.Name = "dgvSoaks";
+            this.dgvSoaks.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvSoaks.Size = new System.Drawing.Size(669, 676);
             this.dgvSoaks.TabIndex = 1;
+            this.dgvSoaks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSoaks_CellClick);
+            this.dgvSoaks.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSoaks_RowEnter);
             // 
             // txtOutPut
             // 
             this.txtOutPut.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutPut.Location = new System.Drawing.Point(1264, 68);
+            this.txtOutPut.Location = new System.Drawing.Point(1082, 68);
             this.txtOutPut.Multiline = true;
             this.txtOutPut.Name = "txtOutPut";
-            this.txtOutPut.Size = new System.Drawing.Size(491, 620);
+            this.txtOutPut.Size = new System.Drawing.Size(448, 620);
             this.txtOutPut.TabIndex = 5;
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(1638, 12);
+            this.btnCheck.Location = new System.Drawing.Point(1456, 12);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(75, 23);
             this.btnCheck.TabIndex = 6;
@@ -86,7 +94,7 @@
             // cboSwapIn
             // 
             this.cboSwapIn.FormattingEnabled = true;
-            this.cboSwapIn.Location = new System.Drawing.Point(1511, 41);
+            this.cboSwapIn.Location = new System.Drawing.Point(1329, 41);
             this.cboSwapIn.Name = "cboSwapIn";
             this.cboSwapIn.Size = new System.Drawing.Size(121, 21);
             this.cboSwapIn.TabIndex = 7;
@@ -94,7 +102,7 @@
             // cboSwapOut
             // 
             this.cboSwapOut.FormattingEnabled = true;
-            this.cboSwapOut.Location = new System.Drawing.Point(1511, 12);
+            this.cboSwapOut.Location = new System.Drawing.Point(1329, 12);
             this.cboSwapOut.Name = "cboSwapOut";
             this.cboSwapOut.Size = new System.Drawing.Size(121, 21);
             this.cboSwapOut.TabIndex = 8;
@@ -102,7 +110,7 @@
             // lblOut
             // 
             this.lblOut.AutoSize = true;
-            this.lblOut.Location = new System.Drawing.Point(1418, 17);
+            this.lblOut.Location = new System.Drawing.Point(1236, 17);
             this.lblOut.Name = "lblOut";
             this.lblOut.Size = new System.Drawing.Size(54, 13);
             this.lblOut.TabIndex = 9;
@@ -111,7 +119,7 @@
             // lblIn
             // 
             this.lblIn.AutoSize = true;
-            this.lblIn.Location = new System.Drawing.Point(1418, 44);
+            this.lblIn.Location = new System.Drawing.Point(1236, 44);
             this.lblIn.Name = "lblIn";
             this.lblIn.Size = new System.Drawing.Size(46, 13);
             this.lblIn.TabIndex = 10;
@@ -119,7 +127,7 @@
             // 
             // btnSwap
             // 
-            this.btnSwap.Location = new System.Drawing.Point(1638, 39);
+            this.btnSwap.Location = new System.Drawing.Point(1456, 39);
             this.btnSwap.Name = "btnSwap";
             this.btnSwap.Size = new System.Drawing.Size(75, 23);
             this.btnSwap.TabIndex = 11;
@@ -129,19 +137,24 @@
             // 
             // dgvPickTeam
             // 
+            this.dgvPickTeam.AllowUserToAddRows = false;
+            this.dgvPickTeam.AllowUserToDeleteRows = false;
+            this.dgvPickTeam.AllowUserToResizeColumns = false;
             this.dgvPickTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvPickTeam.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPickTeam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPickTeam.Location = new System.Drawing.Point(687, 12);
             this.dgvPickTeam.Name = "dgvPickTeam";
-            this.dgvPickTeam.Size = new System.Drawing.Size(571, 676);
+            this.dgvPickTeam.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvPickTeam.Size = new System.Drawing.Size(389, 676);
             this.dgvPickTeam.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1760, 700);
+            this.ClientSize = new System.Drawing.Size(1542, 700);
             this.Controls.Add(this.dgvPickTeam);
             this.Controls.Add(this.btnSwap);
             this.Controls.Add(this.lblIn);

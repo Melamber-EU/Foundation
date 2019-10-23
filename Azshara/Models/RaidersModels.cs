@@ -283,7 +283,8 @@ namespace Azshara.Models
             {
                 name = "Vikingkmg"
             });
-            return raidersMs;
+            List<RaidersM> sorted = raidersMs.OrderBy(o => o.name).ToList();
+            return sorted;
         }
     }    
 }

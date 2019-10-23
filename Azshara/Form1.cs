@@ -46,11 +46,11 @@ namespace Azshara
         {
             List<RaidersM> raidTeam = new List<RaidersM>(RaidersModels.GetRaiders());
             DataGridViewCheckBoxColumn chkCol1 = new DataGridViewCheckBoxColumn();
+            
             chkCol1.HeaderText = "Picked";
             chkCol1.Name = "enabled";
             dtLiveTeam.Columns.Add("Raider",typeof(string));
             dtLiveTeam.Columns.Add("Debuff End", typeof(int));
-            dtLiveTeam.Columns.Add("Debuff Remain", typeof(int));
             foreach (var record in raidTeam)
             {
                 if (record.name == "")
@@ -65,9 +65,10 @@ namespace Azshara
                 }
                 
             }
+            dtLiveTeam.Columns.Add("Pick", typeof(bool));
             //dtLiveTeam.AcceptChanges;
             dgvPickTeam.DataSource = dtLiveTeam;
-            dgvPickTeam.Columns.Add(chkCol1);
+            
         }
 
         private void GenerateMid()
@@ -108,9 +109,7 @@ namespace Azshara
         private void SetupGrid()
         {
             dtRaiders.Columns.Add("name", typeof(string));                        
-            dtTimers.Columns.Add("Timer", typeof(double));
-
-            
+            dtTimers.Columns.Add("Timer", typeof(double));            
 
             DataGridViewComboBoxColumn cmb1 = new DataGridViewComboBoxColumn();
             cmb1.HeaderText = "Select Raider";
@@ -145,11 +144,13 @@ namespace Azshara
             dgvSoaks.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dgvSoaks_EditingControlShowing);
             dgvSoaks.CellValueChanged += new DataGridViewCellEventHandler(dgvSoaks_CellValueChanged);
             dgvSoaks.CurrentCellDirtyStateChanged += new EventHandler(dgvSoaks_CurrentCellDirtyStateChanged);
+            
             dgvSoaks.Columns.Add(cmb1);
             dgvSoaks.Columns.Add(cmb2);
             dgvSoaks.Columns.Add(cmb3);
             dgvSoaks.Columns.Add(cmb4);
             dgvSoaks.Columns.Add(cmb5);
+            
         }
 
         private void dgvSoaks_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -185,17 +186,18 @@ namespace Azshara
                             }
                             dtSetup.Rows.Add(dRow);
                         }
-                        int liveDebuffStart = 200;
                         int liveRowTime = Convert.ToInt32(dgvSoaks.Rows[e.RowIndex].Cells[5].Value);
+                        int liveDebuffStart = 200 + liveRowTime;
+                        
                         foreach (DataRow liveRow in dtLiveTeam.Rows)
                         {
                             if (liveRow.ItemArray[0].ToString() == nameR)
                             {
                                 liveRow[1] = liveDebuffStart;
                             }
-                            dtLiveTeam.AcceptChanges();
+                            //dtLiveTeam.AcceptChanges();
                         }
-                        dgvPickTeam.Refresh();
+                        //dgvPickTeam.Refresh();
                         foreach (DataRow row in dtSetup.Rows)
                         {
                             if (nameR == row.ItemArray[0].ToString() || nameR == row.ItemArray[1].ToString() || 
@@ -427,6 +429,59 @@ namespace Azshara
                     }
                 }
             }
+            foreach (DataRow row in dtLiveTeam.Rows)
+            {
+                if (row.ItemArray[0].ToString() == swapOut)
+                {
+                    row[1] = 0;
+                }
+            }
+        }
+
+        private void DgvSoaks_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ////MessageBox.Show(e.RowIndex.ToString());
+            //int selectedRow = Convert.ToInt32(e.RowIndex);
+            ////foreach (DataGridViewColumn col in dgvSoaks.Columns)
+            ////{
+            ////    Console.WriteLine(col);
+            ////}
+            //dgvSoaks.CellClick -= DgvSoaks_CellClick;
+            //foreach (DataGridViewRow row in dgvSoaks.Rows)
+            //{
+            //    if (row.Index == selectedRow)
+            //    {
+            //        foreach (DataGridViewCell cell in row.Cells)
+            //        {
+            //            if (cell.Value != null)
+            //            {
+            //                Console.WriteLine(cell.Value.ToString());
+            //            }
+            //        }
+            //    }
+            //}
+            //dgvSoaks.CellClick += DgvSoaks_CellClick;
+        }
+
+        private void DgvSoaks_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRow = Convert.ToInt32(e.RowIndex);
+            dgvSoaks.CellClick -= DgvSoaks_RowEnter;
+            foreach (DataGridViewRow row in dgvSoaks.Rows)
+            {
+                if (row.Index == selectedRow)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value != null)
+                        {
+                            Console.WriteLine(cell.Value.ToString());
+
+                        }
+                    }
+                }
+            }
+            dgvSoaks.CellClick += DgvSoaks_RowEnter;
         }
     }
 }
