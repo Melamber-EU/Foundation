@@ -307,11 +307,10 @@ namespace Azshara
 
         public void DoWorkCreateWeakaura()
         {
+            output = "";
             output = header;
             output = header + cdTimersString + System.Environment.NewLine + "end" + Environment.NewLine + cdRaidersString + Environment.NewLine;
             output = output + Environment.NewLine + midd;
-            string baseSetsOpener = "";
-            string baseSetsMid = "";
             int counter = 0;
             int totalCount = setCounters.Count;
             foreach (var row in setCounters)
@@ -319,7 +318,7 @@ namespace Azshara
                 counter = counter + 1;
                 if (row.SetC1T == "cd01_time")
                 {
-                    baseSetsOpener = CreateOpenerStat(row.SetC1T, row.SetC1R);
+                    string baseSetsOpener = CreateOpenerStat(row.SetC1T, row.SetC1R);
                     output = output + baseSetsOpener;
                 }
                 else
@@ -330,9 +329,9 @@ namespace Azshara
                     //}
                     //else
                     //{
-                        baseSetsMid = CreateBaseStat(row.SetC1T, row.SetC1R);
+                    string baseSetsMid = CreateBaseStat(row.SetC1T, row.SetC1R);
                     //}
-                    
+
                     output = output + baseSetsMid;
                 }
             }
@@ -355,7 +354,8 @@ namespace Azshara
 
         private string CreateFooter()
         {
-            string data = "elseif aura_env.timer and tval ~= "; //cd01_time and tval ~= cd02_time and tval ~= cd03_time and tval ~= cd04_time and tval ~= cd05_time and tval ~= cd06_time and tval ~= cd07_time and tval ~= cd08_time and tval ~= cd08_time and tval ~= cd09_time and tval ~= cd010_time and tval ~= cd011_time and tval ~= cd012_time and tval ~= cd013_time and tval ~= cd014_time and tval ~= cd015_time and tval ~= cd016_time and tval ~= cd017_time and tval ~= cd018_time and tval ~= cd019_time and tval ~= cd020_time and tval ~= cd021_time and tval ~= cd022_time and tval ~= cd023_time" + Environment.NewLine;
+            string data = "";
+            data = "elseif aura_env.timer and tval ~= "; //cd01_time and tval ~= cd02_time and tval ~= cd03_time and tval ~= cd04_time and tval ~= cd05_time and tval ~= cd06_time and tval ~= cd07_time and tval ~= cd08_time and tval ~= cd08_time and tval ~= cd09_time and tval ~= cd010_time and tval ~= cd011_time and tval ~= cd012_time and tval ~= cd013_time and tval ~= cd014_time and tval ~= cd015_time and tval ~= cd016_time and tval ~= cd017_time and tval ~= cd018_time and tval ~= cd019_time and tval ~= cd020_time and tval ~= cd021_time and tval ~= cd022_time and tval ~= cd023_time" + Environment.NewLine;
             int counter = 0;
             int total = setCounters.Count;
             foreach (var record in setCounters)
@@ -397,15 +397,15 @@ namespace Azshara
 
         private string CreateBaseStat(string setC1T, string setC1R)
         {
-            string var = "";
-            var = "elseif aura_env.timer and(tval > " + setC1T + " and tval < " + setC1T + " + 4)" + Environment.NewLine;
-            var = var + "then" + Environment.NewLine;
-            var = var + "if not aura_env.soundPlayed then" + Environment.NewLine;
-            var = var + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
-            var = var + "aura_env.soundPlayed = true" + Environment.NewLine;
-            var = var + "end" + Environment.NewLine;
-            var = var + "return " + setC1R + Environment.NewLine;
-            return var;
+            string var2 = "";
+            var2 = "elseif aura_env.timer and(tval > " + setC1T + " and tval < " + setC1T + " + 4)" + Environment.NewLine;
+            var2 = var2 + "then" + Environment.NewLine;
+            var2 = var2 + "if not aura_env.soundPlayed then" + Environment.NewLine;
+            var2 = var2 + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
+            var2 = var2 + "aura_env.soundPlayed = true" + Environment.NewLine;
+            var2 = var2 + "end" + Environment.NewLine;
+            var2 = var2 + "return " + setC1R + Environment.NewLine;
+            return var2;
         }
 
         private void BtnDefaultTimers_Click(object sender, EventArgs e)

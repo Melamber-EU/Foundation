@@ -41,15 +41,15 @@
             this.btnImport = new System.Windows.Forms.Button();
             this.tabCSetup = new System.Windows.Forms.TabControl();
             this.tpBuilder = new System.Windows.Forms.TabPage();
-            this.tpLive = new System.Windows.Forms.TabPage();
             this.dgvSoaks = new System.Windows.Forms.DataGridView();
+            this.tpLive = new System.Windows.Forms.TabPage();
             this.dgvLoad = new System.Windows.Forms.DataGridView();
             this.openFileDialogImportSheet = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).BeginInit();
             this.tabCSetup.SuspendLayout();
             this.tpBuilder.SuspendLayout();
-            this.tpLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).BeginInit();
+            this.tpLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,6 +165,8 @@
             // 
             // tabCSetup
             // 
+            this.tabCSetup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tabCSetup.Controls.Add(this.tpBuilder);
             this.tabCSetup.Controls.Add(this.tpLive);
             this.tabCSetup.Location = new System.Drawing.Point(12, 41);
@@ -184,17 +186,6 @@
             this.tpBuilder.Text = "Builder";
             this.tpBuilder.UseVisualStyleBackColor = true;
             // 
-            // tpLive
-            // 
-            this.tpLive.Controls.Add(this.dgvLoad);
-            this.tpLive.Location = new System.Drawing.Point(4, 22);
-            this.tpLive.Name = "tpLive";
-            this.tpLive.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLive.Size = new System.Drawing.Size(661, 621);
-            this.tpLive.TabIndex = 1;
-            this.tpLive.Text = "Live";
-            this.tpLive.UseVisualStyleBackColor = true;
-            // 
             // dgvSoaks
             // 
             this.dgvSoaks.AllowUserToAddRows = false;
@@ -210,6 +201,17 @@
             this.dgvSoaks.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvSoaks.Size = new System.Drawing.Size(649, 609);
             this.dgvSoaks.TabIndex = 2;
+            // 
+            // tpLive
+            // 
+            this.tpLive.Controls.Add(this.dgvLoad);
+            this.tpLive.Location = new System.Drawing.Point(4, 22);
+            this.tpLive.Name = "tpLive";
+            this.tpLive.Padding = new System.Windows.Forms.Padding(3);
+            this.tpLive.Size = new System.Drawing.Size(661, 621);
+            this.tpLive.TabIndex = 1;
+            this.tpLive.Text = "Live";
+            this.tpLive.UseVisualStyleBackColor = true;
             // 
             // dgvLoad
             // 
@@ -253,8 +255,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).EndInit();
             this.tabCSetup.ResumeLayout(false);
             this.tpBuilder.ResumeLayout(false);
-            this.tpLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).EndInit();
+            this.tpLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
