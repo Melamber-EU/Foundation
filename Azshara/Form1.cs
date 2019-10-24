@@ -113,7 +113,8 @@ namespace Azshara
         private void SetupGrid()
         {
             dtRaiders.Columns.Add("name", typeof(string));                        
-            dtTimers.Columns.Add("Timer", typeof(double));            
+            dtTimers.Columns.Add("Timer", typeof(double));
+            dtTimers.Columns.Add("Soak", typeof(double));
 
             DataGridViewComboBoxColumn cmb1 = new DataGridViewComboBoxColumn();
             cmb1.HeaderText = "Select Raider";
@@ -154,7 +155,17 @@ namespace Azshara
             dgvSoaks.Columns.Add(cmb3);
             dgvSoaks.Columns.Add(cmb4);
             dgvSoaks.Columns.Add(cmb5);
-            
+
+            //DataGridViewTextBoxColumn counter = new DataGridViewTextBoxColumn();
+            //counter.HeaderText = "Soak No.";
+            //counter.Name = "counter";
+            //int countVal = 0;
+            //foreach (DataGridViewRow cRow in dgvSoaks.Rows)
+            //{
+            //    cRow.Cells[6].Value = countVal + 1;
+            //    countVal = countVal + 1;
+            //}
+            //dgvSoaks.Columns.Add(counter);
         }
 
         private void dgvSoaks_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -191,7 +202,7 @@ namespace Azshara
                             dtSetup.Rows.Add(dRow);
                         }
                         int liveRowTime = Convert.ToInt32(dgvSoaks.Rows[e.RowIndex].Cells[5].Value);
-                        int liveDebuffStart = 200 + liveRowTime;
+                        int liveDebuffStart = 120 + liveRowTime;
                         
                         foreach (DataRow liveRow in dtLiveTeam.Rows)
                         {
@@ -412,7 +423,7 @@ namespace Azshara
             List<Timers> timers = RaidersModels.GetTimers();
             foreach (var rec in timers)
             {
-                dtTimers.Rows.Add(rec.timers);
+                dtTimers.Rows.Add(rec.timers, rec.soak);
             }
         }
 

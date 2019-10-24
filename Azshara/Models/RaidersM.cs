@@ -13,6 +13,7 @@ namespace Azshara.Models
     class Timers
     {
         public double timers { get; set; }
+        public double soak { get; set; }
     }
     class SetCounter
     {
