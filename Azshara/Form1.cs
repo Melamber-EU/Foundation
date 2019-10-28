@@ -253,6 +253,7 @@ namespace Azshara
         List<SetCounter> setCounters = new List<SetCounter>();
         private void CreateBase()
         {
+            setCounters.Clear();
             cdTimersString = "";
             cdRaidersString = "";
             dtSetup = new DataTable();
