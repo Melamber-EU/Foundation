@@ -210,10 +210,6 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
-                name = "Jyang"
-            });
-            raidersMs.Add(new RaidersM
-            {
                 name = "Cilvar"
             });
             raidersMs.Add(new RaidersM
@@ -226,10 +222,6 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
-                name = "Noctaru"
-            });
-            raidersMs.Add(new RaidersM
-            {
                 name = "Rekóna"
             });
             raidersMs.Add(new RaidersM
@@ -239,10 +231,6 @@ namespace Azshara.Models
             raidersMs.Add(new RaidersM
             {
                 name = "Reinforce"
-            });
-            raidersMs.Add(new RaidersM
-            {
-                name = "Jying"
             });
             raidersMs.Add(new RaidersM
             {
