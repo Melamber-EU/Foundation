@@ -9,20 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Azshara
 {
-    public partial class Form1 : Form
+    public partial class MainPage : Form
     {
         DataTable dtTimers = new DataTable();
         DataTable dtRaiders = new DataTable();
         DataTable dtSetup = new DataTable();
         DataTable dtLiveTeam = new DataTable();
+        DataSet dataSet = new DataSet();
         string header = "";
         string midd = "";
-        public Form1()
+        public MainPage()
         {
             InitializeComponent();
+            dataSet.Tables.Add(dtSetup);
 #if DEBUG
             btnCheck.Visible = true;
 #else
@@ -109,7 +113,8 @@ namespace Azshara
         private void SetupGrid()
         {
             dtRaiders.Columns.Add("name", typeof(string));                        
-            dtTimers.Columns.Add("Timer", typeof(double));            
+            dtTimers.Columns.Add("Timer", typeof(double));
+            dtTimers.Columns.Add("Soak", typeof(double));
 
             DataGridViewComboBoxColumn cmb1 = new DataGridViewComboBoxColumn();
             cmb1.HeaderText = "Select Raider";
@@ -150,7 +155,17 @@ namespace Azshara
             dgvSoaks.Columns.Add(cmb3);
             dgvSoaks.Columns.Add(cmb4);
             dgvSoaks.Columns.Add(cmb5);
-            
+
+            //DataGridViewTextBoxColumn counter = new DataGridViewTextBoxColumn();
+            //counter.HeaderText = "Soak No.";
+            //counter.Name = "counter";
+            //int countVal = 0;
+            //foreach (DataGridViewRow cRow in dgvSoaks.Rows)
+            //{
+            //    cRow.Cells[6].Value = countVal + 1;
+            //    countVal = countVal + 1;
+            //}
+            //dgvSoaks.Columns.Add(counter);
         }
 
         private void dgvSoaks_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -187,7 +202,7 @@ namespace Azshara
                             dtSetup.Rows.Add(dRow);
                         }
                         int liveRowTime = Convert.ToInt32(dgvSoaks.Rows[e.RowIndex].Cells[5].Value);
-                        int liveDebuffStart = 200 + liveRowTime;
+                        int liveDebuffStart = 120 + liveRowTime;
                         
                         foreach (DataRow liveRow in dtLiveTeam.Rows)
                         {
@@ -238,6 +253,7 @@ namespace Azshara
         List<SetCounter> setCounters = new List<SetCounter>();
         private void CreateBase()
         {
+            setCounters.Clear();
             cdTimersString = "";
             cdRaidersString = "";
             dtSetup = new DataTable();
@@ -273,6 +289,7 @@ namespace Azshara
                     SetC1R = "cd0" + counter.ToString() + "_text",
                 });
             }
+            dgvLoad.DataSource = dtSetup;
         }
 
         string cdTimersString = "";
@@ -286,13 +303,15 @@ namespace Azshara
             cdRaidersString = cdRaidersString + System.Environment.NewLine + input;
         }
         string output = "";
+
+        public string ImportFileNameXML { get; private set; }
+
         public void DoWorkCreateWeakaura()
         {
+            output = "";
             output = header;
             output = header + cdTimersString + System.Environment.NewLine + "end" + Environment.NewLine + cdRaidersString + Environment.NewLine;
             output = output + Environment.NewLine + midd;
-            string baseSetsOpener = "";
-            string baseSetsMid = "";
             int counter = 0;
             int totalCount = setCounters.Count;
             foreach (var row in setCounters)
@@ -300,7 +319,7 @@ namespace Azshara
                 counter = counter + 1;
                 if (row.SetC1T == "cd01_time")
                 {
-                    baseSetsOpener = CreateOpenerStat(row.SetC1T, row.SetC1R);
+                    string baseSetsOpener = CreateOpenerStat(row.SetC1T, row.SetC1R);
                     output = output + baseSetsOpener;
                 }
                 else
@@ -311,9 +330,9 @@ namespace Azshara
                     //}
                     //else
                     //{
-                        baseSetsMid = CreateBaseStat(row.SetC1T, row.SetC1R);
+                    string baseSetsMid = CreateBaseStat(row.SetC1T, row.SetC1R);
                     //}
-                    
+
                     output = output + baseSetsMid;
                 }
             }
@@ -336,7 +355,8 @@ namespace Azshara
 
         private string CreateFooter()
         {
-            string data = "elseif aura_env.timer and tval ~= "; //cd01_time and tval ~= cd02_time and tval ~= cd03_time and tval ~= cd04_time and tval ~= cd05_time and tval ~= cd06_time and tval ~= cd07_time and tval ~= cd08_time and tval ~= cd08_time and tval ~= cd09_time and tval ~= cd010_time and tval ~= cd011_time and tval ~= cd012_time and tval ~= cd013_time and tval ~= cd014_time and tval ~= cd015_time and tval ~= cd016_time and tval ~= cd017_time and tval ~= cd018_time and tval ~= cd019_time and tval ~= cd020_time and tval ~= cd021_time and tval ~= cd022_time and tval ~= cd023_time" + Environment.NewLine;
+            string data = "";
+            data = "elseif aura_env.timer and tval ~= "; //cd01_time and tval ~= cd02_time and tval ~= cd03_time and tval ~= cd04_time and tval ~= cd05_time and tval ~= cd06_time and tval ~= cd07_time and tval ~= cd08_time and tval ~= cd08_time and tval ~= cd09_time and tval ~= cd010_time and tval ~= cd011_time and tval ~= cd012_time and tval ~= cd013_time and tval ~= cd014_time and tval ~= cd015_time and tval ~= cd016_time and tval ~= cd017_time and tval ~= cd018_time and tval ~= cd019_time and tval ~= cd020_time and tval ~= cd021_time and tval ~= cd022_time and tval ~= cd023_time" + Environment.NewLine;
             int counter = 0;
             int total = setCounters.Count;
             foreach (var record in setCounters)
@@ -378,15 +398,15 @@ namespace Azshara
 
         private string CreateBaseStat(string setC1T, string setC1R)
         {
-            string var = "";
-            var = "elseif aura_env.timer and(tval > " + setC1T + " and tval < " + setC1T + " + 4)" + Environment.NewLine;
-            var = var + "then" + Environment.NewLine;
-            var = var + "if not aura_env.soundPlayed then" + Environment.NewLine;
-            var = var + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
-            var = var + "aura_env.soundPlayed = true" + Environment.NewLine;
-            var = var + "end" + Environment.NewLine;
-            var = var + "return " + setC1R + Environment.NewLine;
-            return var;
+            string var2 = "";
+            var2 = "elseif aura_env.timer and(tval > " + setC1T + " and tval < " + setC1T + " + 4)" + Environment.NewLine;
+            var2 = var2 + "then" + Environment.NewLine;
+            var2 = var2 + "if not aura_env.soundPlayed then" + Environment.NewLine;
+            var2 = var2 + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
+            var2 = var2 + "aura_env.soundPlayed = true" + Environment.NewLine;
+            var2 = var2 + "end" + Environment.NewLine;
+            var2 = var2 + "return " + setC1R + Environment.NewLine;
+            return var2;
         }
 
         private void BtnDefaultTimers_Click(object sender, EventArgs e)
@@ -404,17 +424,36 @@ namespace Azshara
             List<Timers> timers = RaidersModels.GetTimers();
             foreach (var rec in timers)
             {
-                dtTimers.Rows.Add(rec.timers);
+                dtTimers.Rows.Add(rec.timers, rec.soak);
             }
         }
 
         private void BtnCheck_Click(object sender, EventArgs e)
         {
-            
+            dgvSoaks.CellClick -= DgvSoaks_RowEnter;
+            dgvSoaks.CellValueChanged -= dgvSoaks_CellValueChanged;
+            foreach (DataRow row in dtSetup.Rows)
+            {
+                int rowIndex = dtSetup.Rows.IndexOf(row);
+                foreach (DataColumn col in dtSetup.Columns)
+                {
+                    int colIndex = dtSetup.Columns.IndexOf(col);
+                    Console.WriteLine(row.ItemArray[colIndex]);
+
+                    try
+                    {
+                        dgvSoaks.Rows[rowIndex].Cells[colIndex].Value = row.ItemArray[colIndex];
+                    }
+                    catch { }
+                }
+            }
+            dgvSoaks.CellClick += DgvSoaks_RowEnter;
+            dgvSoaks.CellValueChanged += dgvSoaks_CellValueChanged;
         }
 
         private void BtnSwap_Click(object sender, EventArgs e)
         {
+            
             string swapOut = cboSwapOut.Text;
             string swapIn = cboSwapIn.Text;
             foreach (DataGridViewColumn col in dgvSoaks.Columns)
@@ -436,6 +475,7 @@ namespace Azshara
                     row[1] = 0;
                 }
             }
+            
         }
 
         private void DgvSoaks_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -475,13 +515,64 @@ namespace Azshara
                     {
                         if (cell.Value != null)
                         {
-                            Console.WriteLine(cell.Value.ToString());
+                           // Console.WriteLine(cell.Value.ToString());
 
                         }
                     }
                 }
             }
             dgvSoaks.CellClick += DgvSoaks_RowEnter;
+        }
+
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            DataSet dsXml = new DataSet();
+            try { dsXml.Tables.Add(dtSetup); }
+            catch { }
+
+            string strDsXml = dsXml.GetXml();
+            string datetimenowSave = DateTime.Now.ToString();
+            datetimenowSave = CleanFileName(datetimenowSave);
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara"; // your code goes here
+
+            Directory.CreateDirectory(subPath);
+
+            string xmlFile = "SetUp" + datetimenowSave + ".xml";
+            string savedFilePath = subPath + "\\" + xmlFile;
+            using (StreamWriter fs = new StreamWriter(savedFilePath)) // XML File Path
+            {
+                dtSetup.WriteXml(fs, XmlWriteMode.WriteSchema);
+            }
+        }
+
+        private void BtnImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string subPath = pathtosave + "\\Azshara";
+                openFileDialogImportSheet.InitialDirectory = subPath;
+            }
+            catch { }
+            DialogResult result = openFileDialogImportSheet.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                ImportFileNameXML = openFileDialogImportSheet.FileName;
+                dtSetup.Clear();
+                DataSet dsXml = new DataSet();
+                try { dsXml.Tables.Add(dtSetup); }
+                catch { }
+                dtSetup.ReadXml(ImportFileNameXML);
+                dgvLoad.DataSource = dtSetup;
+                dgvLoad.Refresh();
+                //dgvLoad.Sort(dgvLoad.Columns["Row"], ListSortDirection.Ascending);
+            }
+            //Console.WriteLine(result);
+        }
+        private static string CleanFileName(string fileName)
+        {
+            return Regex.Replace(fileName, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
         }
     }
 }

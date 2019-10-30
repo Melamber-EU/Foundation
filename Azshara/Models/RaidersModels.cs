@@ -13,151 +13,188 @@ namespace Azshara.Models
             List<Timers> timers = new List<Timers>();
             timers.Add(new Timers
             {
-                timers = 80
+                timers = 80,
+                soak = 1
             });
             timers.Add(new Timers
             {
-                timers = 184
+                timers = 184,
+                soak = 2
             });
             timers.Add(new Timers
             {
-                timers = 196
+                timers = 196,
+                soak = 3
             });
             timers.Add(new Timers
             {
-                timers = 200
+                timers = 200,
+                soak = 4
             });
             timers.Add(new Timers
             {
-                timers = 212
+                timers = 212,
+                soak = 5
             });
             timers.Add(new Timers
             {
-                timers = 215
+                timers = 215,
+                soak = 6
             });
             timers.Add(new Timers
             {
-                timers = 220
+                timers = 220,
+                soak = 7
             });
             timers.Add(new Timers
             {
-                timers = 226
+                timers = 226,
+                soak = 8
             });
             timers.Add(new Timers
             {
-                timers = 236
+                timers = 236,
+                soak = 9
             });
             timers.Add(new Timers
             {
-                timers = 245
+                timers = 245,
+                soak = 10
             });
             timers.Add(new Timers
             {
-                timers = 250
+                timers = 250,
+                soak = 11
             });
             timers.Add(new Timers
             {
-                timers = 261
+                timers = 261,
+                soak = 12
             });
             timers.Add(new Timers
             {
-                timers = 300
+                timers = 300,
+                soak = 13
             });
             timers.Add(new Timers
             {
-                timers = 306
+                timers = 306,
+                soak = 14
             });
             timers.Add(new Timers
             {
-                timers = 308
+                timers = 308,
+                soak = 15
             });
             timers.Add(new Timers
             {
-                timers = 315
+                timers = 315,
+                soak = 16
             });
             timers.Add(new Timers
             {
-                timers = 321
+                timers = 321,
+                soak = 17
             });
             timers.Add(new Timers
             {
-                timers = 330
+                timers = 330,
+                soak = 18
             });
             timers.Add(new Timers
             {
-                timers = 332
+                timers = 332,
+                soak = 19
             });
             timers.Add(new Timers
             {
-                timers = 334
+                timers = 334,
+                soak = 20
             });
             timers.Add(new Timers
             {
-                timers = 339
+                timers = 339,
+                soak = 21
             });
             timers.Add(new Timers
             {
-                timers = 342
+                timers = 342,
+                soak = 22
             });
             timers.Add(new Timers
             {
-                timers = 354
+                timers = 354,
+                soak = 23
             });
             timers.Add(new Timers
             {
-                timers = 363
+                timers = 363,
+                soak = 24
             });
             timers.Add(new Timers
             {
-                timers = 370
+                timers = 370,
+                soak = 25
             });
             timers.Add(new Timers
             {
-                timers = 403
+                timers = 403,
+                soak = 26
             });
             timers.Add(new Timers
             {
-                timers = 417
+                timers = 417,
+                soak = 27
             });
             timers.Add(new Timers
             {
-                timers = 425
+                timers = 425,
+                soak = 28
             });
             timers.Add(new Timers
             {
-                timers = 430
+                timers = 430,
+                soak = 29
             });
             timers.Add(new Timers
             {
-                timers = 436
+                timers = 436,
+                soak = 30
             });
             timers.Add(new Timers
             {
-                timers = 442
+                timers = 442,
+                soak = 31
             });
             timers.Add(new Timers
             {
-                timers = 452
+                timers = 452,
+                soak = 32
             });
             timers.Add(new Timers
             {
-                timers = 463
+                timers = 463,
+                soak = 33
             });
             timers.Add(new Timers
             {
-                timers = 470
+                timers = 470,
+                soak = 34
             });
             timers.Add(new Timers
             {
-                timers = 475
+                timers = 475,
+                soak = 35
             });
             timers.Add(new Timers
             {
-                timers = 480
+                timers = 480,
+                soak = 36
             });
             timers.Add(new Timers
             {
-                timers = 490
+                timers = 490,
+                soak = 37
             });
             return timers;
         }
@@ -173,10 +210,6 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
-                name = "Jyang"
-            });
-            raidersMs.Add(new RaidersM
-            {
                 name = "Cilvar"
             });
             raidersMs.Add(new RaidersM
@@ -189,10 +222,6 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
-                name = "Noctaru"
-            });
-            raidersMs.Add(new RaidersM
-            {
                 name = "Rekóna"
             });
             raidersMs.Add(new RaidersM
@@ -202,10 +231,6 @@ namespace Azshara.Models
             raidersMs.Add(new RaidersM
             {
                 name = "Reinforce"
-            });
-            raidersMs.Add(new RaidersM
-            {
-                name = "Jying"
             });
             raidersMs.Add(new RaidersM
             {
