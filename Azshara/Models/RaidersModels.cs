@@ -308,6 +308,10 @@ namespace Azshara.Models
             {
                 name = "Vikingkmg"
             });
+            raidersMs.Add(new RaidersM
+            {
+                name = "Cauterizéd"
+            });
             List<RaidersM> sorted = raidersMs.OrderBy(o => o.name).ToList();
             return sorted;
         }
