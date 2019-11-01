@@ -45,6 +45,7 @@
             this.tpLive = new System.Windows.Forms.TabPage();
             this.dgvLoad = new System.Windows.Forms.DataGridView();
             this.openFileDialogImportSheet = new System.Windows.Forms.OpenFileDialog();
+            this.tpDemo = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).BeginInit();
             this.tabCSetup.SuspendLayout();
             this.tpBuilder.SuspendLayout();
@@ -169,6 +170,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tabCSetup.Controls.Add(this.tpBuilder);
             this.tabCSetup.Controls.Add(this.tpLive);
+            this.tabCSetup.Controls.Add(this.tpDemo);
             this.tabCSetup.Location = new System.Drawing.Point(12, 41);
             this.tabCSetup.Name = "tabCSetup";
             this.tabCSetup.SelectedIndex = 0;
@@ -233,6 +235,16 @@
             // 
             this.openFileDialogImportSheet.FileName = "openFileDialog1";
             // 
+            // tpDemo
+            // 
+            this.tpDemo.Location = new System.Drawing.Point(4, 22);
+            this.tpDemo.Name = "tpDemo";
+            this.tpDemo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDemo.Size = new System.Drawing.Size(661, 621);
+            this.tpDemo.TabIndex = 2;
+            this.tpDemo.Text = "Demo";
+            this.tpDemo.UseVisualStyleBackColor = true;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,6 +294,7 @@
         private System.Windows.Forms.TabPage tpLive;
         private System.Windows.Forms.DataGridView dgvLoad;
         private System.Windows.Forms.OpenFileDialog openFileDialogImportSheet;
+        private System.Windows.Forms.TabPage tpDemo;
     }
 }
 
