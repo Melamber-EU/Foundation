@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using Microsoft.Data.Sqlite;
+using System.Data.SQLite;
 
 namespace Azshara
 {
@@ -573,6 +575,56 @@ namespace Azshara
         private static string CleanFileName(string fileName)
         {
             return Regex.Replace(fileName, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            
+            ReadClasses();
+        }
+        public static void ReadClasses()
+        {
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara\\Database\\";
+            string fileName = "Raid.db3";
+            string fullPath = subPath + fileName;
+            string sqlQuery = "SELECT * FROM tbl_classes";
+            DataTable dtClasses = ReadClassesFromDB(fullPath, sqlQuery);
+        }
+
+        private static DataTable ReadClassesFromDB(string fullPath, string sqlQuery)
+        {
+            SQLiteConnection sqlite_conn = new SQLiteConnection();
+            sqlite_conn = new SQLiteConnection("Data Source=" + fullPath + ";Version=3;New=False;Compress=True;");
+            DataTable dataTable = new DataTable();
+            try
+            {
+                sqlite_conn.Open();
+                SQLiteCommand command = sqlite_conn.CreateCommand();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                
+                command.CommandText = sqlQuery;
+                adapter.Fill(dataTable);
+                sqlite_conn.Close();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    Console.WriteLine(row.ItemArray[1].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dataTable;
+        }
+
+        public static void OpenDB(string tablePath, string commandText)
+        {
+            
+        }
+        public static void ReadData(SQLiteConnection conn, string tablePath)
+        {
+            
         }
     }
 }
