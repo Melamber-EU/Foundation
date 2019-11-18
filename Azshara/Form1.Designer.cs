@@ -48,8 +48,9 @@
             this.openFileDialogImportSheet = new System.Windows.Forms.OpenFileDialog();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpInfo = new System.Windows.Forms.TabPage();
+            this.tpRoster = new System.Windows.Forms.TabPage();
+            this.dgvRoster = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).BeginInit();
             this.tabCSetup.SuspendLayout();
             this.tpBuilder.SuspendLayout();
@@ -57,7 +58,9 @@
             this.tpLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tpInfo.SuspendLayout();
+            this.tpRoster.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoster)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRun
@@ -263,35 +266,44 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tpInfo);
+            this.tabControl1.Controls.Add(this.tpRoster);
             this.tabControl1.Location = new System.Drawing.Point(687, 63);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(389, 625);
             this.tabControl1.TabIndex = 16;
             // 
-            // tabPage1
+            // tpInfo
             // 
-            this.tabPage1.Controls.Add(this.btnSave);
-            this.tabPage1.Controls.Add(this.dgvPickTeam);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(381, 599);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpInfo.Controls.Add(this.btnSave);
+            this.tpInfo.Controls.Add(this.dgvPickTeam);
+            this.tpInfo.Location = new System.Drawing.Point(4, 22);
+            this.tpInfo.Name = "tpInfo";
+            this.tpInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpInfo.Size = new System.Drawing.Size(381, 599);
+            this.tpInfo.TabIndex = 0;
+            this.tpInfo.Text = "Info";
+            this.tpInfo.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tpRoster
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpRoster.Controls.Add(this.dgvRoster);
+            this.tpRoster.Location = new System.Drawing.Point(4, 22);
+            this.tpRoster.Name = "tpRoster";
+            this.tpRoster.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRoster.Size = new System.Drawing.Size(381, 599);
+            this.tpRoster.TabIndex = 1;
+            this.tpRoster.Text = "Roster";
+            this.tpRoster.UseVisualStyleBackColor = true;
+            // 
+            // dgvRoster
+            // 
+            this.dgvRoster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRoster.Location = new System.Drawing.Point(7, 7);
+            this.dgvRoster.Name = "dgvRoster";
+            this.dgvRoster.Size = new System.Drawing.Size(368, 586);
+            this.dgvRoster.TabIndex = 0;
             // 
             // MainPage
             // 
@@ -319,7 +331,9 @@
             this.tpLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tpInfo.ResumeLayout(false);
+            this.tpRoster.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoster)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,8 +361,9 @@
         private System.Windows.Forms.TabPage tpDemo;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpInfo;
+        private System.Windows.Forms.TabPage tpRoster;
+        private System.Windows.Forms.DataGridView dgvRoster;
     }
 }
 

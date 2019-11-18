@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Azshara.Classes;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -201,10 +203,10 @@ namespace Azshara.Models
         public static List<RaidersM> GetRaiders()
         {
             List<RaidersM> raidersMs = new List<RaidersM>();
-            raidersMs.Add(new RaidersM
-            {
-                name = ""
-            });
+            //raidersMs.Add(new RaidersM
+            //{
+            //    name = ""
+            //});
             raidersMs.Add(new RaidersM {
                 name = "Wârn"
             });
@@ -258,10 +260,6 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
-                name = "Grimlingz"
-            });
-            raidersMs.Add(new RaidersM
-            {
                 name = "Geralltqt"
             });
             raidersMs.Add(new RaidersM
@@ -294,10 +292,6 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
-                name = "Oríxa"
-            });
-            raidersMs.Add(new RaidersM
-            {
                 name = "Kaesraqt"
             });
             raidersMs.Add(new RaidersM
@@ -323,5 +317,59 @@ namespace Azshara.Models
             List<RaidersM> sorted = raidersMs.OrderBy(o => o.name).ToList();
             return sorted;
         }
+        public static List<RaidersM> GetRaidersNameSQL()
+        {
+            List<RaidersM> raidersMs = new List<RaidersM>();
+            List<SQLRoster> sQLRosters = new List<SQLRoster>();
+            List<SQLRoster.SQLClasses> sQLClasses = new List<SQLRoster.SQLClasses>();
+            List<SQLRoster.SQLRoles> sQLRoles = new List<SQLRoster.SQLRoles>();
+            DataTable dataTable = ReadRoster();
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                DataTable dtClass = ReadClasses(Convert.ToInt32(dataRow.ItemArray[2]));
+                string strClass = dtClass.Rows[0].ItemArray[1].ToString();
+                DataTable dtRole = ReadRole(Convert.ToInt32(dataRow.ItemArray[3]));
+                string strRole = dtRole.Rows[0].ItemArray[1].ToString();
+                raidersMs.Add(new RaidersM { name=dataRow.ItemArray[1].ToString() });
+
+                sQLRosters.Add(new SQLRoster { name = dataRow.ItemArray[1].ToString() });
+                sQLClasses.Add(new SQLRoster.SQLClasses { clsName = strClass });
+                sQLRoles.Add(new SQLRoster.SQLRoles { spec = strRole });
+            }
+            List<RaidersM> sorted = raidersMs.OrderBy(o => o.name).ToList();
+            return sorted;
+        }
+
+        public static DataTable ReadRoster()
+        {
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara\\Database\\";
+            string fileName = "Raid.db3";
+            string fullPath = subPath + fileName;
+            string sqlQuery = "SELECT * FROM tbl_roster";
+            DataTable dtRoster = SQLiteF.ReadRosterFromDB(fullPath, sqlQuery);
+            return dtRoster;
+        }
+        public static DataTable ReadClasses(int _ID)
+        {
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara\\Database\\";
+            string fileName = "Raid.db3";
+            string fullPath = subPath + fileName;
+            string sqlQuery = "SELECT * FROM tbl_classes where _ID = " + _ID;
+            DataTable dtClasses = SQLiteF.ReadRosterFromDB(fullPath, sqlQuery);
+            return dtClasses;
+        }
+        public static DataTable ReadRole(int _ID)
+        {
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara\\Database\\";
+            string fileName = "Raid.db3";
+            string fullPath = subPath + fileName;
+            string sqlQuery = "SELECT * FROM tbl_roles where _ID = " + _ID;
+            DataTable dtClasses = SQLiteF.ReadRosterFromDB(fullPath, sqlQuery);
+            return dtClasses;
+        }
+
     }    
 }

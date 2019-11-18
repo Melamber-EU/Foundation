@@ -23,6 +23,7 @@ namespace Azshara
         DataTable dtSetup = new DataTable();
         DataTable dtLiveTeam = new DataTable();
         DataSet dataSet = new DataSet();
+        DataTable dtRoster = new DataTable();
         string header = "";
         string midd = "";
         public MainPage()
@@ -34,6 +35,8 @@ namespace Azshara
 #else
     btnCheck.Visible = false;
 #endif
+            SetupRosterGrid();
+            LoadRoster();
             GenerateTeamPicker();
             GenerateHeader();
             GenerateMid();
@@ -46,6 +49,18 @@ namespace Azshara
             cboSwapIn.ValueMember = "name";
             cboSwapOut.DataSource = swapOutRaidersModels;
             cboSwapOut.ValueMember = "name";
+            
+        }
+
+        private void SetupRosterGrid()
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void LoadRoster()
+        {
+            dtRoster = RaidersModels.ReadRoster();
+            dgvRoster.DataSource = dtRoster;
         }
 
         private void GenerateTeamPicker()
@@ -579,8 +594,7 @@ namespace Azshara
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            
-            ReadClasses();
+            UpdateRoster();
         }
         public static void ReadClasses()
         {
@@ -591,7 +605,16 @@ namespace Azshara
             string sqlQuery = "SELECT * FROM tbl_classes";
             DataTable dtClasses = ReadClassesFromDB(fullPath, sqlQuery);
         }
-
+        
+        public static void UpdateRoster()
+        {
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara\\Database\\";
+            string fileName = "Raid.db3";
+            string fullPath = subPath + fileName;
+            string sqlQuery = "SELECT * FROM tbl_classes";
+            DataTable dtClasses = ReadClassesFromDB(fullPath, sqlQuery);
+        }
         private static DataTable ReadClassesFromDB(string fullPath, string sqlQuery)
         {
             SQLiteConnection sqlite_conn = new SQLiteConnection();
@@ -616,6 +639,31 @@ namespace Azshara
 
             }
             return dataTable;
+        }
+        private static DataTable ReadRosterFromDB(string fullPath, string sqlQuery)
+        {
+            SQLiteConnection sqlite_conn = new SQLiteConnection();
+            sqlite_conn = new SQLiteConnection("Data Source=" + fullPath + ";Version=3;New=False;Compress=True;");
+            DataTable dtRoster = new DataTable();
+            try
+            {
+                sqlite_conn.Open();
+                SQLiteCommand command = sqlite_conn.CreateCommand();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+
+                command.CommandText = sqlQuery;
+                adapter.Fill(dtRoster);
+                sqlite_conn.Close();
+                foreach (DataRow row in dtRoster.Rows)
+                {
+                    Console.WriteLine(row.ItemArray[1].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dtRoster;
         }
 
         public static void OpenDB(string tablePath, string commandText)

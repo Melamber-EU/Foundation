@@ -20,4 +20,21 @@ namespace Azshara.Models
         public string SetC1T { get; set; }
         public string SetC1R { get; set; }
     }
+    class SQLRoster
+    { 
+        public int _ID { get; set; }
+        public string name { get; set; }
+        public class SQLClasses
+        {
+            public int _ID { get; set; }
+            public string clsName { get; set; }
+        }
+        public class SQLRoles
+        {
+            public int _ID { get; set; }
+            public string spec { get; set; }
+        }
+    }
+    
+    
 }
