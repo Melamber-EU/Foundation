@@ -276,6 +276,14 @@ namespace Azshara.Models
             });
             raidersMs.Add(new RaidersM
             {
+                name = "Shakesfeare"
+            });
+            raidersMs.Add(new RaidersM
+            {
+                name = "Cranestep"
+            });
+            raidersMs.Add(new RaidersM
+            {
                 name = "Kossïan"
             });
             raidersMs.Add(new RaidersM
