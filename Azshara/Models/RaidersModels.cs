@@ -326,6 +326,22 @@ namespace Azshara.Models
             {
                 name = "Bobzdruid"
             });
+            raidersMs.Add(new RaidersM
+            {
+                name = "Treesohorny"
+            });
+            raidersMs.Add(new RaidersM
+            {
+                name = "Blockaholic"
+            });
+            raidersMs.Add(new RaidersM
+            {
+                name = "Dinostiitch"
+            });
+            raidersMs.Add(new RaidersM
+            {
+                name = "Bobzpriest"
+            });
             List<RaidersM> sorted = raidersMs.OrderBy(o => o.name).ToList();
             return sorted;
         }

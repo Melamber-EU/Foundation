@@ -45,18 +45,27 @@
             this.tpLive = new System.Windows.Forms.TabPage();
             this.dgvLoad = new System.Windows.Forms.DataGridView();
             this.tpDemo = new System.Windows.Forms.TabPage();
+            this.tpHivemind = new System.Windows.Forms.TabPage();
+            this.btnImportHiveMind = new System.Windows.Forms.Button();
+            this.btnExportHive = new System.Windows.Forms.Button();
+            this.btnImportHive = new System.Windows.Forms.Button();
+            this.btnGenerateHivemind = new System.Windows.Forms.Button();
+            this.dgvHiveMind = new System.Windows.Forms.DataGridView();
             this.openFileDialogImportSheet = new System.Windows.Forms.OpenFileDialog();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpInfo = new System.Windows.Forms.TabPage();
             this.tpRoster = new System.Windows.Forms.TabPage();
             this.dgvRoster = new System.Windows.Forms.DataGridView();
+            this.chkRaidWarn = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).BeginInit();
             this.tabCSetup.SuspendLayout();
             this.tpBuilder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).BeginInit();
             this.tpLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).BeginInit();
+            this.tpHivemind.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHiveMind)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tpInfo.SuspendLayout();
             this.tpRoster.SuspendLayout();
@@ -180,6 +189,7 @@
             this.tabCSetup.Controls.Add(this.tpBuilder);
             this.tabCSetup.Controls.Add(this.tpLive);
             this.tabCSetup.Controls.Add(this.tpDemo);
+            this.tabCSetup.Controls.Add(this.tpHivemind);
             this.tabCSetup.Location = new System.Drawing.Point(12, 41);
             this.tabCSetup.Name = "tabCSetup";
             this.tabCSetup.SelectedIndex = 0;
@@ -250,6 +260,76 @@
             this.tpDemo.Text = "Demo";
             this.tpDemo.UseVisualStyleBackColor = true;
             // 
+            // tpHivemind
+            // 
+            this.tpHivemind.Controls.Add(this.chkRaidWarn);
+            this.tpHivemind.Controls.Add(this.btnImportHiveMind);
+            this.tpHivemind.Controls.Add(this.btnExportHive);
+            this.tpHivemind.Controls.Add(this.btnImportHive);
+            this.tpHivemind.Controls.Add(this.btnGenerateHivemind);
+            this.tpHivemind.Controls.Add(this.dgvHiveMind);
+            this.tpHivemind.Location = new System.Drawing.Point(4, 22);
+            this.tpHivemind.Name = "tpHivemind";
+            this.tpHivemind.Padding = new System.Windows.Forms.Padding(3);
+            this.tpHivemind.Size = new System.Drawing.Size(661, 621);
+            this.tpHivemind.TabIndex = 3;
+            this.tpHivemind.Text = "Hivemind";
+            this.tpHivemind.UseVisualStyleBackColor = true;
+            // 
+            // btnImportHiveMind
+            // 
+            this.btnImportHiveMind.Location = new System.Drawing.Point(242, 6);
+            this.btnImportHiveMind.Name = "btnImportHiveMind";
+            this.btnImportHiveMind.Size = new System.Drawing.Size(75, 23);
+            this.btnImportHiveMind.TabIndex = 7;
+            this.btnImportHiveMind.Text = "Setup";
+            this.btnImportHiveMind.UseVisualStyleBackColor = true;
+            this.btnImportHiveMind.Click += new System.EventHandler(this.btnImportHiveMind_Click);
+            // 
+            // btnExportHive
+            // 
+            this.btnExportHive.Location = new System.Drawing.Point(455, 6);
+            this.btnExportHive.Name = "btnExportHive";
+            this.btnExportHive.Size = new System.Drawing.Size(75, 23);
+            this.btnExportHive.TabIndex = 6;
+            this.btnExportHive.Text = "Export";
+            this.btnExportHive.UseVisualStyleBackColor = true;
+            this.btnExportHive.Click += new System.EventHandler(this.btnExportHive_Click);
+            // 
+            // btnImportHive
+            // 
+            this.btnImportHive.Location = new System.Drawing.Point(374, 6);
+            this.btnImportHive.Name = "btnImportHive";
+            this.btnImportHive.Size = new System.Drawing.Size(75, 23);
+            this.btnImportHive.TabIndex = 5;
+            this.btnImportHive.Text = "Import";
+            this.btnImportHive.UseVisualStyleBackColor = true;
+            this.btnImportHive.Click += new System.EventHandler(this.btnImportHive_Click);
+            // 
+            // btnGenerateHivemind
+            // 
+            this.btnGenerateHivemind.Location = new System.Drawing.Point(590, 6);
+            this.btnGenerateHivemind.Name = "btnGenerateHivemind";
+            this.btnGenerateHivemind.Size = new System.Drawing.Size(65, 23);
+            this.btnGenerateHivemind.TabIndex = 4;
+            this.btnGenerateHivemind.Text = "Generate";
+            this.btnGenerateHivemind.UseVisualStyleBackColor = true;
+            this.btnGenerateHivemind.Click += new System.EventHandler(this.btnGenerateHivemind_Click);
+            // 
+            // dgvHiveMind
+            // 
+            this.dgvHiveMind.AllowUserToResizeColumns = false;
+            this.dgvHiveMind.AllowUserToResizeRows = false;
+            this.dgvHiveMind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvHiveMind.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHiveMind.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHiveMind.Location = new System.Drawing.Point(6, 35);
+            this.dgvHiveMind.Name = "dgvHiveMind";
+            this.dgvHiveMind.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvHiveMind.Size = new System.Drawing.Size(649, 580);
+            this.dgvHiveMind.TabIndex = 3;
+            // 
             // openFileDialogImportSheet
             // 
             this.openFileDialogImportSheet.FileName = "openFileDialog1";
@@ -305,6 +385,16 @@
             this.dgvRoster.Size = new System.Drawing.Size(368, 586);
             this.dgvRoster.TabIndex = 0;
             // 
+            // chkRaidWarn
+            // 
+            this.chkRaidWarn.AutoSize = true;
+            this.chkRaidWarn.Location = new System.Drawing.Point(6, 12);
+            this.chkRaidWarn.Name = "chkRaidWarn";
+            this.chkRaidWarn.Size = new System.Drawing.Size(96, 17);
+            this.chkRaidWarn.TabIndex = 8;
+            this.chkRaidWarn.Text = "Raid Warnings";
+            this.chkRaidWarn.UseVisualStyleBackColor = true;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,6 +420,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoaks)).EndInit();
             this.tpLive.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoad)).EndInit();
+            this.tpHivemind.ResumeLayout(false);
+            this.tpHivemind.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHiveMind)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tpInfo.ResumeLayout(false);
             this.tpRoster.ResumeLayout(false);
@@ -364,6 +457,13 @@
         private System.Windows.Forms.TabPage tpInfo;
         private System.Windows.Forms.TabPage tpRoster;
         private System.Windows.Forms.DataGridView dgvRoster;
+        private System.Windows.Forms.TabPage tpHivemind;
+        private System.Windows.Forms.Button btnGenerateHivemind;
+        private System.Windows.Forms.DataGridView dgvHiveMind;
+        private System.Windows.Forms.Button btnExportHive;
+        private System.Windows.Forms.Button btnImportHive;
+        private System.Windows.Forms.Button btnImportHiveMind;
+        private System.Windows.Forms.CheckBox chkRaidWarn;
     }
 }
 

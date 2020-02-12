@@ -20,6 +20,7 @@ namespace Azshara
     {
         DataTable dtTimers = new DataTable();
         DataTable dtRaiders = new DataTable();
+        DataTable dtHivemind = new DataTable();
         DataTable dtSetup = new DataTable();
         DataTable dtLiveTeam = new DataTable();
         DataSet dataSet = new DataSet();
@@ -35,12 +36,13 @@ namespace Azshara
 #else
     btnCheck.Visible = false;
 #endif
-            SetupRosterGrid();
+            //SetupRosterGrid();
             LoadRoster();
             GenerateTeamPicker();
             GenerateHeader();
             GenerateMid();
             SetupGrid();
+            SetupGridHiveMind();
             LoadData();
             dgvSoaks.DataSource = dtTimers;
             List<RaidersM> swapOutRaidersModels = new List<RaidersM>(RaidersModels.GetRaiders());
@@ -50,6 +52,38 @@ namespace Azshara
             cboSwapOut.DataSource = swapOutRaidersModels;
             cboSwapOut.ValueMember = "name";
             
+        }
+
+        private void SetupGridHiveMind()
+        {                                  
+            //dtTimers.Columns.Add("Timer", typeof(double));
+            //dtTimers.Columns.Add("Soak", typeof(double));
+            dtHivemind.Columns.Add("Line", typeof(string));
+            dtHivemind.Columns.Add("Time", typeof(string));
+
+            dgvHiveMind.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(dgvHiveMind_EditingControlShowing);
+            dgvHiveMind.CellValueChanged += new DataGridViewCellEventHandler(dgvHiveMind_CellValueChanged);
+            dgvHiveMind.CurrentCellDirtyStateChanged += new EventHandler(dgvHiveMind_CurrentCellDirtyStateChanged);            
+
+            dgvHiveMind.RowsDefaultCellStyle.BackColor = Color.White;
+            dgvHiveMind.AlternatingRowsDefaultCellStyle.BackColor = Color.Wheat;
+            dgvHiveMind.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvHiveMind.DataSource = dtHivemind;
+        }
+
+        private void dgvHiveMind_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void dgvHiveMind_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void dgvHiveMind_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         private void SetupRosterGrid()
@@ -406,7 +440,11 @@ namespace Azshara
             var = "if aura_env.timer and(tval > " + setC1T + " and tval < " + setC1T + " + 4)" + Environment.NewLine;
             var = var + "then" + Environment.NewLine;
             var = var + "if not aura_env.soundPlayed then" + Environment.NewLine;
-            var = var + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
+            if (chkRaidWarn.CheckState == CheckState.Checked)
+            {
+                var = var + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
+            }
+            
             var = var + "aura_env.soundPlayed = true" + Environment.NewLine;
             var = var + "end" + Environment.NewLine;
             var = var + "return " + setC1R + Environment.NewLine;
@@ -419,7 +457,10 @@ namespace Azshara
             var2 = "elseif aura_env.timer and(tval > " + setC1T + " and tval < " + setC1T + " + 4)" + Environment.NewLine;
             var2 = var2 + "then" + Environment.NewLine;
             var2 = var2 + "if not aura_env.soundPlayed then" + Environment.NewLine;
-            var2 = var2 + "SendChatMessage(" + setC1R + ", \"RAID_WARNING\")" + Environment.NewLine;
+            if (chkRaidWarn.CheckState == CheckState.Checked)
+            {
+                var2 = var2 + "SendChatMessage(" + setC1T + ", \"RAID_WARNING\")" + Environment.NewLine;
+            }
             var2 = var2 + "aura_env.soundPlayed = true" + Environment.NewLine;
             var2 = var2 + "end" + Environment.NewLine;
             var2 = var2 + "return " + setC1R + Environment.NewLine;
@@ -673,6 +714,133 @@ namespace Azshara
         public static void ReadData(SQLiteConnection conn, string tablePath)
         {
             
+        }
+
+        private void btnGenerateHivemind_Click(object sender, EventArgs e)
+        {
+            CreateHiveMindBase();
+            DoWorkCreateWeakaura();
+        }
+
+        private void CreateHiveMindBase()
+        {
+            setCounters.Clear();
+            cdTimersString = "";
+            cdRaidersString = "";
+            dtSetup = new DataTable();
+            foreach (DataGridViewColumn col in dgvHiveMind.Columns)
+            {
+                dtSetup.Columns.Add(col.Name);
+            }
+            foreach (DataGridViewRow row in dgvHiveMind.Rows)
+            {
+                DataRow dRow = dtSetup.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                dtSetup.Rows.Add(dRow);
+            }
+            int counter = 0;
+            foreach (DataRow dtRowOut in dtSetup.Rows)
+            {
+                if (dtRowOut.ItemArray[0] == null || dtRowOut.ItemArray[0].ToString() == "")
+                {
+                    return;
+                }
+                //Console.WriteLine(dtRowOut.ItemArray[0] + " : " + dtRowOut.ItemArray[1] + " : " + dtRowOut.ItemArray[2] + " : " + dtRowOut.ItemArray[3] + " : " + dtRowOut.ItemArray[4] + " : " + dtRowOut.ItemArray[5]);
+                int rowCount = dtSetup.Rows.Count;
+                counter = counter + 1;
+                //if (counter >= 38)
+                //{
+                //    return;
+                //}
+                //Console.WriteLine(counter.ToString() + " :: " + rowCount.ToString());
+                cdTimers("cd0" + counter.ToString() + "_time = " + dtRowOut.ItemArray[1]);
+                cdRaiders("cd0" + counter.ToString() + "_text = \"" + dtRowOut.ItemArray[0] + "\"");
+                setCounters.Add(new SetCounter
+                {
+                    SetC1T = "cd0" + counter.ToString() + "_time",
+                    SetC1R = "cd0" + counter.ToString() + "_text",
+                });
+            }
+            dgvLoad.DataSource = dtSetup;
+        }
+
+        private void btnExportHive_Click(object sender, EventArgs e)
+        {
+            DataSet dsXml = new DataSet();
+            try { dsXml.Tables.Add(dtSetup); }
+            catch { }
+
+            string strDsXml = dsXml.GetXml();
+            string datetimenowSave = DateTime.Now.ToString();
+            datetimenowSave = CleanFileName(datetimenowSave);
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara"; // your code goes here
+
+            Directory.CreateDirectory(subPath);
+
+            string xmlFile = "SetUp-HiveMind" + datetimenowSave + ".xml";
+            string savedFilePath = subPath + "\\" + xmlFile;
+            using (StreamWriter fs = new StreamWriter(savedFilePath)) // XML File Path
+            {
+                dtSetup.WriteXml(fs, XmlWriteMode.WriteSchema);
+            }
+        }
+
+        private void btnImportHive_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string subPath = pathtosave + "\\Azshara";
+                openFileDialogImportSheet.InitialDirectory = subPath;
+            }
+            catch { }
+            DialogResult result = openFileDialogImportSheet.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                ImportFileNameXML = openFileDialogImportSheet.FileName;
+                dtSetup.Clear();
+                dtHivemind.Clear();
+                DataSet dsXml = new DataSet();
+                try { dsXml.Tables.Add(dtSetup); }
+                catch { }
+                dtSetup.ReadXml(ImportFileNameXML);
+                dgvLoad.DataSource = dtSetup;
+                dgvLoad.Refresh();
+            }
+            UpdateDGVHiveMindFromdtSetup();
+        }
+
+        private void btnImportHiveMind_Click(object sender, EventArgs e)
+        {
+            UpdateDGVHiveMindFromdtSetup();
+        }
+
+        private void UpdateDGVHiveMindFromdtSetup()
+        {
+            dtHivemind.Clear();
+            DataRow rowHV;
+            foreach (DataRow row in dtSetup.Rows)
+            {
+                rowHV = dtHivemind.NewRow();
+                rowHV["Line"] = row.ItemArray[0].ToString();
+                rowHV["Time"] = row.ItemArray[1].ToString();
+                dtHivemind.Rows.Add(rowHV);
+            }
+            dtHivemind.AcceptChanges();
+            foreach (DataRow dataRow in dtHivemind.Rows)
+            {
+                if (dataRow.ItemArray[0].ToString() == "" || dataRow.ItemArray[0] == null)
+                {
+                    dataRow.Delete();
+                }
+            }
+            dtHivemind.AcceptChanges();
+            dgvHiveMind.DataSource = dtHivemind;
+            dgvHiveMind.Refresh();
         }
     }
 }
