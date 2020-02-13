@@ -842,5 +842,40 @@ namespace Azshara
             dgvHiveMind.DataSource = dtHivemind;
             dgvHiveMind.Refresh();
         }
+
+        private void BtnExportERT_Click(object sender, EventArgs e)
+        {            
+            string datetimenowSave = DateTime.Now.ToString();
+            datetimenowSave = CleanFileName(datetimenowSave);
+            string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string subPath = pathtosave + "\\Azshara"; // your code goes here
+
+            Directory.CreateDirectory(subPath);
+
+            string xmlFile = "ERT-" + txtTitle +"_"+ datetimenowSave + ".txt";
+            string savedFilePath = subPath + "\\" + xmlFile;
+            using (StreamWriter fs = new StreamWriter(savedFilePath)) // XML File Path
+            {
+                fs.Write(txtERT.Text);
+            }
+        }
+
+        private void btnImportERT_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pathtosave = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string subPath = pathtosave + "\\Azshara";
+                openFileDialogImportSheet.InitialDirectory = subPath;
+            }
+            catch { }
+            DialogResult result = openFileDialogImportSheet.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                ImportFileNameXML = openFileDialogImportSheet.FileName;
+                string text = System.IO.File.ReadAllText(ImportFileNameXML);
+                txtERT.Text = text;
+            }
+        }
     }
 }

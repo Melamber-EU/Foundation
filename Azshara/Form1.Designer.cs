@@ -46,6 +46,7 @@
             this.dgvLoad = new System.Windows.Forms.DataGridView();
             this.tpDemo = new System.Windows.Forms.TabPage();
             this.tpHivemind = new System.Windows.Forms.TabPage();
+            this.chkRaidWarn = new System.Windows.Forms.CheckBox();
             this.btnImportHiveMind = new System.Windows.Forms.Button();
             this.btnExportHive = new System.Windows.Forms.Button();
             this.btnImportHive = new System.Windows.Forms.Button();
@@ -54,10 +55,14 @@
             this.openFileDialogImportSheet = new System.Windows.Forms.OpenFileDialog();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tpERT = new System.Windows.Forms.TabPage();
+            this.btnExportERT = new System.Windows.Forms.Button();
+            this.txtERT = new System.Windows.Forms.TextBox();
+            this.btnImportERT = new System.Windows.Forms.Button();
             this.tpInfo = new System.Windows.Forms.TabPage();
             this.tpRoster = new System.Windows.Forms.TabPage();
             this.dgvRoster = new System.Windows.Forms.DataGridView();
-            this.chkRaidWarn = new System.Windows.Forms.CheckBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPickTeam)).BeginInit();
             this.tabCSetup.SuspendLayout();
             this.tpBuilder.SuspendLayout();
@@ -67,6 +72,7 @@
             this.tpHivemind.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHiveMind)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tpERT.SuspendLayout();
             this.tpInfo.SuspendLayout();
             this.tpRoster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoster)).BeginInit();
@@ -276,9 +282,19 @@
             this.tpHivemind.Text = "Hivemind";
             this.tpHivemind.UseVisualStyleBackColor = true;
             // 
+            // chkRaidWarn
+            // 
+            this.chkRaidWarn.AutoSize = true;
+            this.chkRaidWarn.Location = new System.Drawing.Point(6, 12);
+            this.chkRaidWarn.Name = "chkRaidWarn";
+            this.chkRaidWarn.Size = new System.Drawing.Size(96, 17);
+            this.chkRaidWarn.TabIndex = 8;
+            this.chkRaidWarn.Text = "Raid Warnings";
+            this.chkRaidWarn.UseVisualStyleBackColor = true;
+            // 
             // btnImportHiveMind
             // 
-            this.btnImportHiveMind.Location = new System.Drawing.Point(242, 6);
+            this.btnImportHiveMind.Location = new System.Drawing.Point(293, 3);
             this.btnImportHiveMind.Name = "btnImportHiveMind";
             this.btnImportHiveMind.Size = new System.Drawing.Size(75, 23);
             this.btnImportHiveMind.TabIndex = 7;
@@ -288,7 +304,7 @@
             // 
             // btnExportHive
             // 
-            this.btnExportHive.Location = new System.Drawing.Point(455, 6);
+            this.btnExportHive.Location = new System.Drawing.Point(455, 3);
             this.btnExportHive.Name = "btnExportHive";
             this.btnExportHive.Size = new System.Drawing.Size(75, 23);
             this.btnExportHive.TabIndex = 6;
@@ -298,7 +314,7 @@
             // 
             // btnImportHive
             // 
-            this.btnImportHive.Location = new System.Drawing.Point(374, 6);
+            this.btnImportHive.Location = new System.Drawing.Point(374, 3);
             this.btnImportHive.Name = "btnImportHive";
             this.btnImportHive.Size = new System.Drawing.Size(75, 23);
             this.btnImportHive.TabIndex = 5;
@@ -308,7 +324,7 @@
             // 
             // btnGenerateHivemind
             // 
-            this.btnGenerateHivemind.Location = new System.Drawing.Point(590, 6);
+            this.btnGenerateHivemind.Location = new System.Drawing.Point(590, 3);
             this.btnGenerateHivemind.Name = "btnGenerateHivemind";
             this.btnGenerateHivemind.Size = new System.Drawing.Size(65, 23);
             this.btnGenerateHivemind.TabIndex = 4;
@@ -346,13 +362,59 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tpERT);
             this.tabControl1.Controls.Add(this.tpInfo);
             this.tabControl1.Controls.Add(this.tpRoster);
-            this.tabControl1.Location = new System.Drawing.Point(687, 63);
+            this.tabControl1.Location = new System.Drawing.Point(687, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(389, 625);
+            this.tabControl1.Size = new System.Drawing.Size(389, 647);
             this.tabControl1.TabIndex = 16;
+            // 
+            // tpERT
+            // 
+            this.tpERT.Controls.Add(this.txtTitle);
+            this.tpERT.Controls.Add(this.btnExportERT);
+            this.tpERT.Controls.Add(this.txtERT);
+            this.tpERT.Controls.Add(this.btnImportERT);
+            this.tpERT.Location = new System.Drawing.Point(4, 22);
+            this.tpERT.Name = "tpERT";
+            this.tpERT.Padding = new System.Windows.Forms.Padding(3);
+            this.tpERT.Size = new System.Drawing.Size(381, 621);
+            this.tpERT.TabIndex = 2;
+            this.tpERT.Text = "ERT Note";
+            this.tpERT.UseVisualStyleBackColor = true;
+            // 
+            // btnExportERT
+            // 
+            this.btnExportERT.Location = new System.Drawing.Point(87, 3);
+            this.btnExportERT.Name = "btnExportERT";
+            this.btnExportERT.Size = new System.Drawing.Size(75, 23);
+            this.btnExportERT.TabIndex = 10;
+            this.btnExportERT.Text = "Export";
+            this.btnExportERT.UseVisualStyleBackColor = true;
+            this.btnExportERT.Click += new System.EventHandler(this.BtnExportERT_Click);
+            // 
+            // txtERT
+            // 
+            this.txtERT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtERT.Location = new System.Drawing.Point(6, 32);
+            this.txtERT.Multiline = true;
+            this.txtERT.Name = "txtERT";
+            this.txtERT.Size = new System.Drawing.Size(369, 583);
+            this.txtERT.TabIndex = 17;
+            // 
+            // btnImportERT
+            // 
+            this.btnImportERT.Location = new System.Drawing.Point(6, 3);
+            this.btnImportERT.Name = "btnImportERT";
+            this.btnImportERT.Size = new System.Drawing.Size(75, 23);
+            this.btnImportERT.TabIndex = 9;
+            this.btnImportERT.Text = "Import";
+            this.btnImportERT.UseVisualStyleBackColor = true;
+            this.btnImportERT.Click += new System.EventHandler(this.btnImportERT_Click);
             // 
             // tpInfo
             // 
@@ -361,7 +423,7 @@
             this.tpInfo.Location = new System.Drawing.Point(4, 22);
             this.tpInfo.Name = "tpInfo";
             this.tpInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpInfo.Size = new System.Drawing.Size(381, 599);
+            this.tpInfo.Size = new System.Drawing.Size(381, 621);
             this.tpInfo.TabIndex = 0;
             this.tpInfo.Text = "Info";
             this.tpInfo.UseVisualStyleBackColor = true;
@@ -372,7 +434,7 @@
             this.tpRoster.Location = new System.Drawing.Point(4, 22);
             this.tpRoster.Name = "tpRoster";
             this.tpRoster.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRoster.Size = new System.Drawing.Size(381, 599);
+            this.tpRoster.Size = new System.Drawing.Size(381, 621);
             this.tpRoster.TabIndex = 1;
             this.tpRoster.Text = "Roster";
             this.tpRoster.UseVisualStyleBackColor = true;
@@ -385,15 +447,12 @@
             this.dgvRoster.Size = new System.Drawing.Size(368, 586);
             this.dgvRoster.TabIndex = 0;
             // 
-            // chkRaidWarn
+            // txtTitle
             // 
-            this.chkRaidWarn.AutoSize = true;
-            this.chkRaidWarn.Location = new System.Drawing.Point(6, 12);
-            this.chkRaidWarn.Name = "chkRaidWarn";
-            this.chkRaidWarn.Size = new System.Drawing.Size(96, 17);
-            this.chkRaidWarn.TabIndex = 8;
-            this.chkRaidWarn.Text = "Raid Warnings";
-            this.chkRaidWarn.UseVisualStyleBackColor = true;
+            this.txtTitle.Location = new System.Drawing.Point(168, 3);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(207, 20);
+            this.txtTitle.TabIndex = 18;
             // 
             // MainPage
             // 
@@ -424,6 +483,8 @@
             this.tpHivemind.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHiveMind)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tpERT.ResumeLayout(false);
+            this.tpERT.PerformLayout();
             this.tpInfo.ResumeLayout(false);
             this.tpRoster.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoster)).EndInit();
@@ -464,6 +525,11 @@
         private System.Windows.Forms.Button btnImportHive;
         private System.Windows.Forms.Button btnImportHiveMind;
         private System.Windows.Forms.CheckBox chkRaidWarn;
+        private System.Windows.Forms.TabPage tpERT;
+        private System.Windows.Forms.TextBox txtERT;
+        private System.Windows.Forms.Button btnExportERT;
+        private System.Windows.Forms.Button btnImportERT;
+        private System.Windows.Forms.TextBox txtTitle;
     }
 }
 
